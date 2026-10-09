@@ -194,9 +194,14 @@ html, body {
 
 .items-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  gap: 7px;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 8px;
   padding: 6px 8px 10px;
+}
+
+/* Getränke: 10 items — genau 5 Spalten = 2 vollständige Zeilen */
+#grid-getraenke {
+  grid-template-columns: repeat(5, 1fr);
 }
 
 /* ── TILE ────────────────────────────────────────────────── */
@@ -231,8 +236,8 @@ html, body {
   margin-bottom: 3px;
 }
 
-.speisen   .tile-visual { background: linear-gradient(135deg, #fde8e4 0%, #f5c5be 100%); }
-.getraenke .tile-visual { background: linear-gradient(135deg, #deeeff 0%, #b8d8f8 100%); }
+.speisen   .tile-visual { background: #fff5f4; }
+.getraenke .tile-visual { background: #f2f7ff; }
 
 .tile-emoji {
   font-size: 2.4rem;
@@ -247,7 +252,8 @@ html, body {
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  padding: 6px;
   opacity: 0;
   z-index: 2;
   transition: opacity 0.35s ease;
@@ -255,7 +261,7 @@ html, body {
 .tile-img.loaded { opacity: 1; }
 
 .tile-name {
-  font-size: 0.67rem;
+  font-size: 0.72rem;
   font-weight: 600;
   color: var(--fg);
   line-height: 1.25;
@@ -263,7 +269,7 @@ html, body {
 }
 
 .tile-price {
-  font-size: 0.78rem;
+  font-size: 0.82rem;
   font-weight: 700;
   color: var(--accent);
   font-variant-numeric: tabular-nums;
@@ -351,11 +357,11 @@ html, body {
 .cart-row {
   display: flex;
   align-items: center;
-  gap: 5px;
-  padding: 6px 6px 6px 8px;
-  border-radius: 7px;
-  margin-bottom: 4px;
-  border-left: 3px solid transparent;
+  gap: 8px;
+  padding: 10px 10px 10px 12px;
+  border-radius: 9px;
+  margin-bottom: 6px;
+  border-left: 4px solid transparent;
 }
 
 .cart-row.cat-speisen {
@@ -370,43 +376,44 @@ html, body {
 
 .cart-name {
   flex: 1;
-  font-size: 0.74rem;
-  font-weight: 500;
-  line-height: 1.3;
+  font-size: 0.82rem;
+  font-weight: 600;
+  line-height: 1.35;
   color: var(--fg);
   min-width: 0;
 }
 
-.qty-ctrl { display: flex; align-items: center; gap: 3px; }
+.qty-ctrl { display: flex; align-items: center; gap: 5px; }
 
 .qty-btn {
-  width: 25px;
-  height: 25px;
-  border-radius: 6px;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
   border: 1px solid var(--border);
   background: var(--surface);
   color: var(--fg);
-  font-size: 0.88rem;
+  font-size: 1.1rem;
   font-weight: 700;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 }
 .qty-btn:active { background: var(--sep); }
 
 .qty-n {
-  font-size: 0.84rem;
+  font-size: 1rem;
   font-weight: 700;
-  min-width: 20px;
+  min-width: 26px;
   text-align: center;
   font-variant-numeric: tabular-nums;
 }
 
 .cart-sub {
-  font-size: 0.77rem;
+  font-size: 0.9rem;
   font-weight: 700;
-  min-width: 50px;
+  min-width: 58px;
   text-align: right;
   color: var(--accent);
   font-variant-numeric: tabular-nums;
@@ -461,16 +468,18 @@ html, body {
 
 .btn-clear {
   width: 100%;
-  padding: 7px;
+  padding: 11px;
   background: transparent;
-  color: var(--fg-2);
-  border: 1px solid var(--border);
+  color: #c0392b;
+  border: 1.5px solid #c0392b;
   border-radius: 8px;
-  font-size: 0.78rem;
+  font-size: 0.84rem;
+  font-weight: 600;
   cursor: pointer;
   font-family: 'Inter', sans-serif;
+  opacity: 0.75;
 }
-.btn-clear:active { background: var(--sep); }
+.btn-clear:active { background: #fff0ee; opacity: 1; }
 
 /* ── NARROW MODE: compact bottom bar + drawer ────────────── */
 .cart-mini-bar {
@@ -584,8 +593,14 @@ html, body {
 
 /* Medium: side-by-side, narrower cart */
 @media (min-width: 500px) and (max-width: 699px) {
-  .cart-panel { width: 220px; }
-  .items-grid { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); }
+  .cart-panel  { width: 220px; }
+  .items-grid  { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); }
+  #grid-getraenke { grid-template-columns: repeat(5, 1fr); }
+}
+
+/* Narrow: Getränke back to auto */
+@media (max-width: 499px) {
+  #grid-getraenke { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
 }
 
 /* ── TOAST ───────────────────────────────────────────────── */
@@ -1036,16 +1051,4 @@ function toast(msg, type) {
   el.textContent = msg;
   el.className   = 'toast on' + (type ? ' ' + type : '');
   clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => { el.className = 'toast'; }, 3500);
-}
-
-// ── FORMAT ───────────────────────────────────────────────────
-function fmt(n) {
-  return n.toFixed(2).replace('.', ',') + ' €';
-}
-
-// First-start hint
-if (!localStorage.getItem('scriptUrl')) {
-  setTimeout(() => toast('⚙️ Script-URL in den Einstellungen hinterlegen', ''), 900);
-}
-</script>
+  toastTimer = setTimeout(() =>
