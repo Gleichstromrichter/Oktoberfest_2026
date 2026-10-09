@@ -1051,4 +1051,16 @@ function toast(msg, type) {
   el.textContent = msg;
   el.className   = 'toast on' + (type ? ' ' + type : '');
   clearTimeout(toastTimer);
-  toastTimer = setTimeout(() =>
+  toastTimer = setTimeout(() => { el.className = 'toast'; }, 3500);
+}
+
+// ── FORMAT ───────────────────────────────────────────────────
+function fmt(n) {
+  return n.toFixed(2).replace('.', ',') + ' €';
+}
+
+// First-start hint
+if (!localStorage.getItem('scriptUrl')) {
+  setTimeout(() => toast('⚙️ Script-URL in den Einstellungen hinterlegen', ''), 900);
+}
+</script>
