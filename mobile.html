@@ -626,7 +626,8 @@ const ls = {
   get: k => { try { return localStorage.getItem(k); } catch { return null; } },
   set: (k, v) => { try { localStorage.setItem(k, v); } catch {} }
 };
-const getUrl   = ()    => ls.get('gasUrl') || '';
+const DEFAULT_URL = 'https://script.google.com/macros/s/AKfycbzBfUi1xIa9ikeiZ14qD7NM_gUxUyXioe_AEktyaqoKC5mhj7TW6MvaCKaj7WQbchau/exec';
+const getUrl   = ()    => ls.get('gasUrl') || DEFAULT_URL;
 const setUrl   = v     => ls.set('gasUrl', v);
 const getTxId  = ()    => parseInt(ls.get('txIdMobile') || '0', 10);
 const incTxId  = ()    => { const n = getTxId() + 1; ls.set('txIdMobile', n); return n; };
@@ -816,9 +817,8 @@ function showToast(msg, isError) {
 /* ── Setup modal ──────────────────────────────── */
 function showSetupModal() {
   closeDrawer();
-  const modal = document.getElementById('setup-modal');
   document.getElementById('url-input').value = getUrl();
-  modal.classList.remove('hidden');
+  document.getElementById('setup-modal').classList.remove('hidden');
 }
 function hideSetupModal() {
   document.getElementById('setup-modal').classList.add('hidden');
@@ -859,5 +859,4 @@ document.getElementById('url-input').addEventListener('keydown', e => {
 /* ── Init ─────────────────────────────────────── */
 buildGrid();
 refreshUI();
-if (!getUrl()) showSetupModal();
 </script>

@@ -958,7 +958,7 @@ function closeDrawer() {
 
 // ── CHECKOUT ─────────────────────────────────────────────────
 async function checkout() {
-  const url = localStorage.getItem('scriptUrl') || '';
+  const url = localStorage.getItem('scriptUrl') || 'https://script.google.com/macros/s/AKfycbzBfUi1xIa9ikeiZ14qD7NM_gUxUyXioe_AEktyaqoKC5mhj7TW6MvaCKaj7WQbchau/exec';
   if (!url) {
     toast('⚙️ Script-URL in den Einstellungen hinterlegen.', 'err');
     return;
@@ -1020,7 +1020,7 @@ updateStat();
 
 // ── SETTINGS MODAL ───────────────────────────────────────────
 function openModal() {
-  document.getElementById('js-url-input').value = localStorage.getItem('scriptUrl') || '';
+  document.getElementById('js-url-input').value = localStorage.getItem('scriptUrl') || 'https://script.google.com/macros/s/AKfycbzBfUi1xIa9ikeiZ14qD7NM_gUxUyXioe_AEktyaqoKC5mhj7TW6MvaCKaj7WQbchau/exec';
   document.getElementById('js-overlay').classList.add('open');
   requestAnimationFrame(() => document.getElementById('js-url-input').focus());
 }
@@ -1055,8 +1055,4 @@ function fmt(n) {
   return n.toFixed(2).replace('.', ',') + ' €';
 }
 
-// First-start hint
-if (!localStorage.getItem('scriptUrl')) {
-  setTimeout(() => toast('⚙️ Script-URL in den Einstellungen hinterlegen', ''), 900);
-}
 </script>
