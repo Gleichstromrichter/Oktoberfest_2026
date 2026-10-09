@@ -184,24 +184,20 @@ html, body {
 .getraenke { background: var(--getraenke-bg); }
 
 .cat-head {
-  padding: 8px 12px 5px;
+  padding: 6px 12px 3px;
   font-family: 'Playfair Display', Georgia, serif;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 700;
 }
 .speisen   .cat-head { color: var(--speisen-head); }
 .getraenke .cat-head { color: var(--getraenke-head); }
 
+/* Beide Grids identisch → immer gleich große Kacheln */
 .items-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  gap: 8px;
-  padding: 6px 8px 10px;
-}
-
-/* Getränke: 10 items — genau 5 Spalten = 2 vollständige Zeilen */
-#grid-getraenke {
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 7px;
+  padding: 5px 8px 8px;
 }
 
 /* ── TILE ────────────────────────────────────────────────── */
@@ -223,10 +219,10 @@ html, body {
 .tile:active { transform: scale(0.93); }
 .tile.active { border-color: var(--tile-ring); }
 
-/* Image area — emoji always shows; real photo fades in on top when loaded */
+/* Image area — 16:9 keeps tiles compact so all rows fit without scrolling */
 .tile-visual {
   width: 100%;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 16 / 9;
   position: relative;
   border-radius: 8px;
   overflow: hidden;
@@ -298,7 +294,7 @@ html, body {
 
 /* ── CART PANEL (wide) ───────────────────────────────────── */
 .cart-panel {
-  width: 300px;
+  width: 340px;
   flex-shrink: 0;
   background: var(--cart);
   border-left: 1px solid var(--border);
@@ -357,10 +353,10 @@ html, body {
 .cart-row {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 10px 10px 10px 12px;
-  border-radius: 9px;
-  margin-bottom: 6px;
+  gap: 10px;
+  padding: 13px 10px 13px 14px;
+  border-radius: 10px;
+  margin-bottom: 8px;
   border-left: 4px solid transparent;
 }
 
@@ -376,7 +372,7 @@ html, body {
 
 .cart-name {
   flex: 1;
-  font-size: 0.82rem;
+  font-size: 0.9rem;
   font-weight: 600;
   line-height: 1.35;
   color: var(--fg);
@@ -386,13 +382,13 @@ html, body {
 .qty-ctrl { display: flex; align-items: center; gap: 5px; }
 
 .qty-btn {
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   border-radius: 8px;
   border: 1px solid var(--border);
   background: var(--surface);
   color: var(--fg);
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   font-weight: 700;
   cursor: pointer;
   display: flex;
@@ -403,17 +399,17 @@ html, body {
 .qty-btn:active { background: var(--sep); }
 
 .qty-n {
-  font-size: 1rem;
+  font-size: 1.1rem;
   font-weight: 700;
-  min-width: 26px;
+  min-width: 30px;
   text-align: center;
   font-variant-numeric: tabular-nums;
 }
 
 .cart-sub {
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-weight: 700;
-  min-width: 58px;
+  min-width: 62px;
   text-align: right;
   color: var(--accent);
   font-variant-numeric: tabular-nums;
