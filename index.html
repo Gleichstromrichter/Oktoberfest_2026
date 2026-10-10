@@ -160,10 +160,34 @@ html, body {
 }
 .btn-icon:active { background: rgba(255,255,255,0.22); }
 
+/* ── CAT TABS ─────────────────────────────────────────────── */
+.cat-tabs {
+  display: flex;
+  background: var(--surface);
+  border-bottom: 2px solid var(--border);
+  flex-shrink: 0;
+  height: 42px;
+}
+.cat-tab {
+  flex: 1;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--fg-2);
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  transition: color 0.15s, background 0.15s;
+  -webkit-tap-highlight-color: transparent;
+}
+.cat-tab.active[data-cat="speisen"]   { color: var(--speisen-head);   border-bottom-color: var(--speisen-head);   background: var(--speisen-bg); }
+.cat-tab.active[data-cat="getraenke"] { color: var(--getraenke-head); border-bottom-color: var(--getraenke-head); background: var(--getraenke-bg); }
+
 /* ── BODY ────────────────────────────────────────────────── */
 .app-body {
   display: flex;
-  height: calc(100% - 52px);
+  height: calc(100% - 94px);
   overflow: hidden;
 }
 
@@ -710,6 +734,11 @@ html, body {
   <button class="btn-icon" onclick="openModal()" title="Einstellungen" aria-label="Einstellungen">⚙️</button>
 </header>
 
+<nav class="cat-tabs">
+  <button class="cat-tab active" data-cat="speisen">🍽 Speisen</button>
+  <button class="cat-tab" data-cat="getraenke">🍺 Getränke</button>
+</nav>
+
 <div class="app-body">
 
   <!-- ── ITEMS ────────────────────────────────────────────── -->
@@ -1055,4 +1084,16 @@ function fmt(n) {
   return n.toFixed(2).replace('.', ',') + ' €';
 }
 
+
+// -- CATEGORY TABS --
+document.querySelectorAll('.cat-tab').forEach(function(tab) {
+  tab.addEventListener('click', function() {
+    document.querySelectorAll('.cat-tab').forEach(function(t) { t.classList.remove('active'); });
+    tab.classList.add('active');
+    document.querySelectorAll('.category').forEach(function(cat) {
+      cat.style.display = cat.classList.contains(tab.dataset.cat) ? '' : 'none';
+    });
+  });
+});
+document.querySelector('.category.getraenke').style.display = 'none';
 </script>
